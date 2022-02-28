@@ -30,7 +30,7 @@ export default function MovieBox(props) {
     return (
         <div className="movie-list-box">
             <div>
-                <Link className="movie-list-box-link" to={`/movie/${movie.id}`}>
+                <Link className="movie-list-box-link" to={`/react-website/movie/${movie.id}`}>
                     {movie.poster_path ? (<img className="movie-list-box-img" src={header + movie.poster_path} alt={movie.original_title}/>)
                                        : (<img className="movie-list-box-img" src={ImgNotAvailable} alt="not available"/>)}
                     <div className="movie-list-box-title">
