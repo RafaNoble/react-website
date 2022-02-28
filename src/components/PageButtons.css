@@ -1,0 +1,30 @@
+.page-buttons {
+    padding-top: 3%;
+    display: grid;
+    grid-gap: 50px;
+    grid-template-columns: auto auto auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-previous-button, .page-next-button {
+    border: none;
+    outline: none;
+    width: 80px;
+    height: 30px;
+    background-color: darkred;
+    border-radius: 15px;
+}
+
+.page-previous-button:hover, .page-next-button:hover {
+    background: red;
+}
+
+.page-previous-button:disabled, .page-next-button:disabled {
+    background: grey;
+}
+
+.page-previous-button-icon, .page-next-button-icon {
+    vertical-align: -15%;
+    color: whitesmoke;
+}

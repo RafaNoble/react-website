@@ -1,0 +1,25 @@
+.movie-info {
+    padding-top: 3%;
+    display: flex;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+.movie-info-img {
+    margin-top: 26.8px;
+    margin-right: 70px;
+    height: 400px;
+    border-radius: 15px;
+}
+
+.movie-info-header {
+    font-size: 20px;
+}
+
+.movie-info-content {
+    padding-left: 2%;
+}
+
+.movie-info-releaseDate-content, .movie-info-genre-content, .movie-info-runtime-content, .movie-info-overview-content {
+    padding-left: 2%;
+}

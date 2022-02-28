@@ -1,0 +1,17 @@
+.home-button {
+    border: none;
+    outline: none;
+    width: 80px;
+    height: 30px;
+    background-color: darkred;
+    border-radius: 15px;
+}
+
+.home-button:hover {
+    background: red;
+}
+
+.home-button-icon {
+    vertical-align: -15%;
+    color: whitesmoke;
+}
