@@ -13,11 +13,11 @@ export default function App() {
             <ScrollToTop/>
             <TopBar/>
             <Routes>
-                <Route path="/" element={<Homepage/>}/>
-                <Route path="/page/:p" element={<Homepage/>}/>
-                <Route path="/search/:query" element={<SearchResults/>}/>
-                <Route path="/search/:query/page/:p" element={<SearchResults/>}/>
-                <Route path="/movie/:id" element={<Movie/>}/>
+                <Route path="/react-website/" element={<Homepage/>}/>
+                <Route path="/react-website/page/:p" element={<Homepage/>}/>
+                <Route path="/react-website/search/:query" element={<SearchResults/>}/>
+                <Route path="/react-website/search/:query/page/:p" element={<SearchResults/>}/>
+                <Route path="/react-website/movie/:id" element={<Movie/>}/>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
         </BrowserRouter>

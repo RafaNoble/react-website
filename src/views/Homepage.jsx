@@ -16,7 +16,7 @@ export default function Homepage() {
         <div className="homepage">
             {params.p === undefined ? (<MovieList listName="Explore" movieIdList={movie_id_list.slice(0, movXPage)}/>)
                                     : (<MovieList listName="Explore" movieIdList={movie_id_list.slice((params.p - 1) * movXPage, params.p * movXPage)}/>)}
-            <PageButtons numItems={movies_data.length} itemsXPage={movXPage} urlHeader="/"/>
+            <PageButtons numItems={movies_data.length} itemsXPage={movXPage} urlHeader="/react-website/"/>
         </div>
     )
 }

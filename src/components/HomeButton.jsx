@@ -6,7 +6,7 @@ export default function HomeButton() {
     const navigate = useNavigate();
 
     function handleClick() {
-        navigate("/");
+        navigate("/react-website/");
     }
     
     return (

@@ -32,7 +32,7 @@ export default function SearchResults() {
                 <div>
                     {params.p === undefined ? (<MovieList listName={`Results for '${params.query}'`} movieIdList={filteredIdMovies.slice(0, movXPage)}/>)
                                             : (<MovieList listName={`Results for '${params.query}'`} movieIdList={filteredIdMovies.slice((params.p - 1) * movXPage, params.p * movXPage)}/>)}
-                    <PageButtons numItems={filteredMovies.length} itemsXPage={movXPage} urlHeader={`/search/${params.query}/`}/>
+                    <PageButtons numItems={filteredMovies.length} itemsXPage={movXPage} urlHeader={`/react-website/search/${params.query}/`}/>
                 </div>
             )
             :
