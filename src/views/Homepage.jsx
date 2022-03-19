@@ -1,22 +1,38 @@
 import '../css/Homepage.css';
 import { useParams } from 'react-router-dom';
-import { movies_data } from '../data/moviesDataJSON';
 import MovieList from '../components/MovieList';
 import PageButtons from '../components/PageButtons';
 
 export default function Homepage() {
     const params = useParams();
-    const movXPage = 50;
+    const [movies, setMovies] = useState({});
+    let isMounted = true;
+    let page = (params.p == undefined ? 1 : parseInt(params.p));
+    // Llamar a la API
 
-    let movie_id_list = movies_data.map((movie) => {
+    useEffect(() => {
+        try {
+            fetch(``) // Llamar a la API para sacar las 50 primeras películas xD
+            .then((response) => response.json())
+            .then((data) => {
+                if (isMounted) {
+                    setMovies(data);
+                }
+            });
+        }
+        catch(error) {
+            console.log(error);
+        }
+    }, [page]);
+
+    let movie_id_list = movies.map((movie) => {
         return movie.id;
     });
 
     return (
         <div className="homepage">
-            {params.p === undefined ? (<MovieList listName="Explore" movieIdList={movie_id_list.slice(0, movXPage)}/>)
-                                    : (<MovieList listName="Explore" movieIdList={movie_id_list.slice((params.p - 1) * movXPage, params.p * movXPage)}/>)}
-            <PageButtons numItems={movies_data.length} itemsXPage={movXPage} urlHeader="/react-website/"/>
+            <MovieList listName="Explore" movieIdList={movie_id_list}/>
+            <PageButtons numItems={1000} itemsXPage={50} urlHeader="/react-website/"/>
         </div>
     )
 }

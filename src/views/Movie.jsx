@@ -1,32 +1,45 @@
 import '../css/Movie.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { movies_data } from '../data/moviesDataJSON';
 import MovieInfo from '../components/MovieInfo';
 import MovieList from '../components/MovieList';
 
 export default function Movie() {
     const params = useParams();
     const navigate = useNavigate();
+    const [movie, setMovie] = useState({});
 
-    function getMovie(movieId) {
-        return movies_data.find((movie) => {
-            return movie.id === movieId;
-        });
-    }
+    // Llamar la API
+    useEffect(() => {
+        let isMounted = true;
 
-    const movie_info = getMovie(params.id);
+        try {
+            fetch(``) // Llamar 1 peli
+            .then((response) => response.json())
+            .then((data) => {
+                if (isMounted)
+                    setMovie(data);
+            });
+        }
+        catch(error) {
+            console.log(error);
+        }
+
+        return () => {
+            isMounted = false
+        };
+    }, [params.id]);
     
     useEffect(() => {
-        if (movie_info === undefined)
+        if (movie === undefined)
             navigate("notfound");
-    }, [movie_info, navigate]);
+    }, [movie, navigate]);
 
     return (
         <div className="movie">
-            {movie_info !== undefined && <MovieInfo id={movie_info.id}/>}
-            {movie_info !== undefined && <MovieList listName="Related" movieIdList={movie_info.relatedMovies}/>}
+            {movie !== undefined && <MovieInfo movie={movie}/>}
+            {movie !== undefined && <MovieList listName="Related" movieIdList={movie.relatedMovies}/>}
         </div>
     )
 }

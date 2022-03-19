@@ -1,7 +1,7 @@
 import '../css/MovieBox.css';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import header from '../data/urlHeader';
+import header from '../assets/urlHeader';
 import ImgNotAvailable from '../assets/Image-Not-Available.png';
 
 export default function MovieBox(props) {
@@ -11,7 +11,7 @@ export default function MovieBox(props) {
         let isMounted = true;
 
         try {
-            fetch(`https://api.themoviedb.org/3/movie/${props.id}?api_key=7d00d849e6faf0e552458a8ec8230945`)
+            fetch(``)
             .then((response) => response.json())
             .then((data) => {
                 if (isMounted)

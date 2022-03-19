@@ -1,42 +1,23 @@
 import '../css/MovieInfo.css';
 import { useState, useEffect } from 'react';
-import header from '../data/urlHeader';
+import header from '../assets/urlHeader';
 import ImgNotAvailable from '../assets/Image-Not-Available.png';
 
 export default function MovieInfo(props) {
-    const [movie, setMovie] = useState({});
     const [genres, setGenres] = useState("");
+    let movie = props.movie;
 
     useEffect(() => {
-        let isMounted = true;
-
-        try {
-            fetch(`https://api.themoviedb.org/3/movie/${props.id}?api_key=7d00d849e6faf0e552458a8ec8230945`)
-            .then((response) => response.json())
-            .then((data) => {
-                if (isMounted) {
-                    setMovie(data);
-
-                    let genres = '';
+        let genres = '';
                     
-                    if (data.genres.length !== 0)
-                        genres += data.genres.map((genre) => ' ' + genre.name);
-                    else
-                        genres = <p>N/A</p>;
-                    
-                    setGenres(genres);
-                }
-            });
-        }
-        catch(error) {
-            console.log(error);
-        }
-
-        return () => {
-            isMounted = false
-        };
-    }, [props.id]);
-
+        if (movie.genres.length !== 0)
+            genres += movie.genres.map((genre) => ' ' + genre.name);
+        else
+            genres = <p>N/A</p>;
+        
+        setGenres(genres);
+    }, [movie]);
+    
     return (
         <div className="movie-info">
             {movie.poster_path ? (<img className="movie-info-img" src={header + movie.poster_path} alt={movie.original_title}/>)
