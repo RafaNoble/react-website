@@ -6,20 +6,22 @@ import MovieInfo from '../components/MovieInfo';
 import MovieList from '../components/MovieList';
 
 export default function Movie() {
+    const [isLoading, setIsLoading] = useState(true);
+    const [movie, setMovie] = useState({});
     const params = useParams();
     const navigate = useNavigate();
-    const [movie, setMovie] = useState({});
 
-    // Llamar la API
     useEffect(() => {
         let isMounted = true;
 
         try {
-            fetch(``) // Llamar 1 peli
+            fetch(`http://9d25-81-38-15-169.ngrok.io/api/movie/${params.id}`)
             .then((response) => response.json())
             .then((data) => {
-                if (isMounted)
-                    setMovie(data);
+                if (isMounted) {
+                    setMovie(data.content[0]);
+                    setIsLoading(false);
+                }
             });
         }
         catch(error) {
@@ -35,11 +37,13 @@ export default function Movie() {
         if (movie === undefined)
             navigate("notfound");
     }, [movie, navigate]);
+    
+    let movie_id_list = (isLoading ? [] : movie.ids_similar_films);
 
     return (
         <div className="movie">
             {movie !== undefined && <MovieInfo movie={movie}/>}
-            {movie !== undefined && <MovieList listName="Related" movieIdList={movie.relatedMovies}/>}
+            {movie !== undefined && <MovieList listName="Related" movieIdList={movie_id_list}/>}
         </div>
     )
 }

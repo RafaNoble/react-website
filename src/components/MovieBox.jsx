@@ -11,11 +11,11 @@ export default function MovieBox(props) {
         let isMounted = true;
 
         try {
-            fetch(``)
+            fetch(`http://9d25-81-38-15-169.ngrok.io/api/movie/${props.id}`)
             .then((response) => response.json())
             .then((data) => {
                 if (isMounted)
-                    setMovie(data);
+                    setMovie(data.content[0]);
             });
         }
         catch(error) {
@@ -30,7 +30,7 @@ export default function MovieBox(props) {
     return (
         <div className="movie-list-box">
             <div>
-                <Link className="movie-list-box-link" to={`/react-website/movie/${movie.id}`}>
+                <Link className="movie-list-box-link" to={`/react-website/movie/${movie.film_id}`}>
                     {movie.poster_path ? (<img className="movie-list-box-img" src={header + movie.poster_path} alt={movie.original_title}/>)
                                        : (<img className="movie-list-box-img" src={ImgNotAvailable} alt="not available"/>)}
                     <div className="movie-list-box-title">
@@ -41,5 +41,3 @@ export default function MovieBox(props) {
         </div>
     )
 }
-
-

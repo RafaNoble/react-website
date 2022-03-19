@@ -1,23 +1,23 @@
 import '../css/Homepage.css';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import MovieList from '../components/MovieList';
 import PageButtons from '../components/PageButtons';
 
 export default function Homepage() {
-    const params = useParams();
+    const [isLoading, setIsLoading] = useState(true);
     const [movies, setMovies] = useState({});
-    let isMounted = true;
-    let page = (params.p == undefined ? 1 : parseInt(params.p));
-    // Llamar a la API
+    const params = useParams();
+    let page = (params.p === undefined ? 0 : parseInt(params.p) - 1);
+    let itemsXPage = 50;
 
     useEffect(() => {
         try {
-            fetch(``) // Llamar a la API para sacar las 50 primeras películas xD
+            fetch(`http://9d25-81-38-15-169.ngrok.io/api/movie/page/${page}`, {mode: 'cors'})
             .then((response) => response.json())
             .then((data) => {
-                if (isMounted) {
-                    setMovies(data);
-                }
+                setMovies(data.content);
+                setIsLoading(false);
             });
         }
         catch(error) {
@@ -25,14 +25,14 @@ export default function Homepage() {
         }
     }, [page]);
 
-    let movie_id_list = movies.map((movie) => {
-        return movie.id;
-    });
+    let movie_id_list = (isLoading ? [] : movies.map((movie) => {
+        return movie.film_id;
+    }));
 
     return (
         <div className="homepage">
             <MovieList listName="Explore" movieIdList={movie_id_list}/>
-            <PageButtons numItems={1000} itemsXPage={50} urlHeader="/react-website/"/>
+            <PageButtons numItems={1000} itemsXPage={itemsXPage} urlHeader="/react-website/"/>
         </div>
     )
 }

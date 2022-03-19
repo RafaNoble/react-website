@@ -18,7 +18,7 @@ export default function SearchResults() {
         });
     };
     
-    const filteredMovies = filterMovies(movies_data, params.query);
+    /*const filteredMovies = filterMovies(movies_data, params.query);
     
     let filteredIdMovies = filteredMovies.map((movie) => {
         return movie.id;
@@ -41,5 +41,5 @@ export default function SearchResults() {
                 </div>
             )}
         </div>
-    )
+    )*/
 }
