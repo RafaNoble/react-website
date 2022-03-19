@@ -15,7 +15,6 @@ export default function App() {
             <Routes>
                 <Route path="/react-website/" element={<Homepage/>}/>
                 <Route path="/react-website/page/:p" element={<Homepage/>}/>
-                <Route path="/react-website/search/" element={<Homepage/>}/>
                 <Route path="/react-website/search/:query" element={<SearchResults/>}/>
                 <Route path="/react-website/search/:query/page/:p" element={<SearchResults/>}/>
                 <Route path="/react-website/movie/:id" element={<Movie/>}/>

@@ -14,7 +14,8 @@ export default function SearchBar() {
     }, [location.pathname])
 
     const onSubmit = (e) => {
-        navigate(`/react-website/search/${value}`);
+        if (value != "") 
+            navigate(`/react-website/search/${value}`);
         e.preventDefault();
     };
 
