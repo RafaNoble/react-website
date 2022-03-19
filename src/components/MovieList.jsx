@@ -1,4 +1,4 @@
-import './MovieList.css';
+import '../css/MovieList.css';
 import MovieBox from './MovieBox';
 
 export default function MovieList(props) {

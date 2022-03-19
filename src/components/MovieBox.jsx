@@ -1,4 +1,4 @@
-import './MovieBox.css';
+import '../css/MovieBox.css';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import header from '../data/urlHeader';

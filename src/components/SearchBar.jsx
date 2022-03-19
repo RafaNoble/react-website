@@ -1,4 +1,4 @@
-import './SearchBar.css';
+import '../css/SearchBar.css';
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';

@@ -1,4 +1,4 @@
-import './MovieInfo.css';
+import '../css/MovieInfo.css';
 import { useState, useEffect } from 'react';
 import header from '../data/urlHeader';
 import ImgNotAvailable from '../assets/Image-Not-Available.png';

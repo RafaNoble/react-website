@@ -1,4 +1,4 @@
-import './SearchResults.css';
+import '../css/SearchResults.css';
 import { useParams } from 'react-router-dom';
 import { movies_data } from '../data/moviesDataJSON';
 import MovieList from '../components/MovieList';
