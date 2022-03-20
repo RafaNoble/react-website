@@ -28,7 +28,7 @@ export default function Homepage() {
     let movie_id_list = (isLoading ? [] : movies.map((movie) => {
         return movie.film_id;
     }));
-
+    console.log(movie_id_list);
     return (
         <div className="homepage">
             <MovieList listName="Explore" movieIdList={movie_id_list}/>

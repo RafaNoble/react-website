@@ -35,9 +35,9 @@ export default function MovieInfo(props) {
                 //console.log(genreMap);
                 arrayGenres.push(genreMap);
             }
-            console.log(arrayGenres);
+            //console.log(arrayGenres);
             genres += arrayGenres.map((genre) => ' ' + genre.get('name'));
-            console.log(genres);
+            //console.log(genres);
         } else
             genres = <p>N/A</p>;
         

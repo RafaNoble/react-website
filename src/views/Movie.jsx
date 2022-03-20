@@ -10,7 +10,7 @@ export default function Movie() {
     const [movie, setMovie] = useState({});
     const params = useParams();
     const navigate = useNavigate();
-
+    let movie_id_list = [];
     useEffect(() => {
         let isMounted = true;
 
@@ -20,8 +20,12 @@ export default function Movie() {
             .then((data) => {
                 console.log(data);
                 if (isMounted) {
-                    setMovie(data.content[0]);
+                    let movie = data.content[0];
+                    setMovie(movie);
                     setIsLoading(false);
+                    movie.ids_similar_films = movie.ids_similar_films.slice(1, movie.ids_similar_films.length - 1);
+                    movie.ids_similar_films = movie.ids_similar_films.split(",").map(Number)
+                    console.log(movie.ids_similar_films);
                 }
             });
         }
@@ -39,12 +43,12 @@ export default function Movie() {
             navigate("notfound");
     }, [movie, navigate]);
     
-    let movie_id_list = (isLoading ? [] : movie.ids_similar_films);
+    movie_id_list = (isLoading ? [] : movie.ids_similar_films);
 
     return (
         <div className="movie">
             {movie !== undefined && <MovieInfo movie={movie}/>}
-            {movie !== undefined && <MovieList listName="Related" movieIdList={movie_id_list}/>}
+            {/*movie !== undefined && <MovieList listName="Related" movieIdList={movie_id_list}/>*/}
         </div>
     )
 }
