@@ -21,11 +21,10 @@ export default function Movie() {
                 console.log(data);
                 if (isMounted) {
                     let movie = data.content[0];
-                    setMovie(movie);
-                    setIsLoading(false);
                     movie.ids_similar_films = movie.ids_similar_films.slice(1, movie.ids_similar_films.length - 1);
                     movie.ids_similar_films = movie.ids_similar_films.split(",").map(Number)
-                    console.log(movie.ids_similar_films);
+                    setMovie(movie);
+                    setIsLoading(false);
                 }
             });
         }
@@ -43,12 +42,14 @@ export default function Movie() {
             navigate("notfound");
     }, [movie, navigate]);
     
-    movie_id_list = (isLoading ? [] : movie.ids_similar_films);
+    //movie_id_list = (isLoading ? [] : movie.ids_similar_films);
+    movie_id_list = [2, 62];
+    console.log(movie_id_list);
 
     return (
         <div className="movie">
             {movie !== undefined && <MovieInfo movie={movie}/>}
-            {/*movie !== undefined && <MovieList listName="Related" movieIdList={movie_id_list}/>*/}
+            {movie !== undefined && <MovieList listName="Related" movieIdList={movie_id_list}/>}
         </div>
     )
 }
