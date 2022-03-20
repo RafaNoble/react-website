@@ -42,9 +42,7 @@ export default function Movie() {
             navigate("notfound");
     }, [movie, navigate]);
     
-    //movie_id_list = (isLoading ? [] : movie.ids_similar_films);
-    movie_id_list = [2, 62];
-    console.log(movie_id_list);
+    movie_id_list = (isLoading ? [] : movie.ids_similar_films);
 
     return (
         <div className="movie">
