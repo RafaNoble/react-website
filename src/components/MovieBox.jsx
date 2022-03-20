@@ -11,7 +11,7 @@ export default function MovieBox(props) {
         let isMounted = true;
 
         try {
-            fetch(`http://9d25-81-38-15-169.ngrok.io/api/movie/${props.id}`)
+            fetch(`http://90c9-81-38-15-169.ngrok.io/api/movie/${props.id}`)
             .then((response) => response.json())
             .then((data) => {
                 if (isMounted)

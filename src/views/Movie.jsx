@@ -15,9 +15,10 @@ export default function Movie() {
         let isMounted = true;
 
         try {
-            fetch(`http://9d25-81-38-15-169.ngrok.io/api/movie/${params.id}`)
+            fetch(`http://90c9-81-38-15-169.ngrok.io/api/movie/${params.id}`)
             .then((response) => response.json())
             .then((data) => {
+                console.log(data);
                 if (isMounted) {
                     setMovie(data.content[0]);
                     setIsLoading(false);
