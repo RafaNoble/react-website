@@ -2,28 +2,27 @@ import '../css/Movie.css';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { serverHeader } from '../assets/constants';
 import MovieInfo from '../components/MovieInfo';
 import MovieList from '../components/MovieList';
 
 export default function Movie() {
     const [isLoading, setIsLoading] = useState(true);
     const [movie, setMovie] = useState({});
+    const [similarFilms, setSimilarFilms] = useState([]);
     const params = useParams();
     const navigate = useNavigate();
-    let movie_id_list = [];
+
     useEffect(() => {
         let isMounted = true;
 
         try {
-            fetch(`http://90c9-81-38-15-169.ngrok.io/api/movie/${params.id}`)
+            fetch(serverHeader + `/api/movie/${params.id}`)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 if (isMounted) {
-                    let movie = data.content[0];
-                    movie.ids_similar_films = movie.ids_similar_films.slice(1, movie.ids_similar_films.length - 1);
-                    movie.ids_similar_films = movie.ids_similar_films.split(",").map(Number)
-                    setMovie(movie);
+                    setMovie(data.content[0]);
+                    setSimilarFilms(data.content.slice(1));
                     setIsLoading(false);
                 }
             });
@@ -42,12 +41,12 @@ export default function Movie() {
             navigate("notfound");
     }, [movie, navigate]);
     
-    movie_id_list = (isLoading ? [] : movie.ids_similar_films);
+    let movie_list = (isLoading ? [] : similarFilms);
 
     return (
         <div className="movie">
             {movie !== undefined && <MovieInfo movie={movie}/>}
-            {movie !== undefined && <MovieList listName="Related" movieIdList={movie_id_list}/>}
+            {movie !== undefined && <MovieList listName="Related" movieList={movie_list}/>}
         </div>
     )
 }

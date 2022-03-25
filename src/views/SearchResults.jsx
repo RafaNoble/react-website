@@ -1,23 +1,25 @@
 import '../css/SearchResults.css';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { serverHeader, itemsXPage } from '../assets/constants';
 import MovieList from '../components/MovieList';
 import PageButtons from '../components/PageButtons';
 
 export default function SearchResults() {
-    const params = useParams();
-    const movXPage = 50;
+    const [isLoading, setIsLoading] = useState(true);
     const [movieList, setMovieList] = useState({});
-    console.log(params.query);
+    const params = useParams();
+    
     useEffect(() => {
         let isMounted = true;
 
         try {
-            fetch(`http://90c9-81-38-15-169.ngrok.io/api/movie/${params.query}`)
+            fetch(serverHeader + `/api/movie/${params.query}`)
             .then((response) => response.json())
             .then((data) => {
                 if (isMounted) {
-                     setMovieList(data.content);     
+                    setMovieList(data.content);  
+                    setIsLoading(false);   
                 }
             });
         }
@@ -30,14 +32,16 @@ export default function SearchResults() {
         };
     }, [params.query]);
 
+    let movie_list = (isLoading ? [] : movieList);
+
     return (
         <div className="results">
-            {movieList !== undefined && movieList.length > 0 ?
+            {movie_list !== undefined && movie_list.length > 0 ?
             (
                 <div>
-                    {params.p === undefined ? (<MovieList listName={`Results for '${params.query}'`} movieIdList={movieList.slice(0, movXPage)}/>)
-                                            : (<MovieList listName={`Results for '${params.query}'`} movieIdList={movieList.slice((params.p - 1) * movXPage, params.p * movXPage)}/>)}
-                    <PageButtons numItems={movieList.length} itemsXPage={movXPage} urlHeader={`/react-website/search/${params.query}/`}/>
+                    {params.p === undefined ? (<MovieList listName={`Results for '${params.query}'`} movieList={movie_list.slice(0, itemsXPage)}/>)
+                                            : (<MovieList listName={`Results for '${params.query}'`} movieList={movie_list.slice((params.p - 1) * itemsXPage, params.p * itemsXPage)}/>)}
+                    <PageButtons numItems={movie_list.length} itemsXPage={itemsXPage} urlHeader={`/react-website/search/${params.query}/`}/>
                 </div>
             )
             :
