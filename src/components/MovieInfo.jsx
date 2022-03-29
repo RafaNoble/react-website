@@ -37,7 +37,9 @@ export default function MovieInfo(props) {
             }
 
             genres += arrayGenres.map((genre) => ' ' + genre.get('name'));
-        } else
+        }
+        
+        else
             genres = <p>N/A</p>;
         
         setGenres(genres);

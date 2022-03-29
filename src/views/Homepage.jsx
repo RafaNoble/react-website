@@ -26,13 +26,23 @@ export default function Homepage() {
             console.log(error);
         }
     }, [page]);
-
-    let movie_list = (isLoading ? [] : movies);
     
-    return (
-        <div className="homepage">
-            <MovieList listName="Explore" movieList={movie_list}/>
-            <PageButtons numItems={moviesNum} itemsXPage={itemsXPage} urlHeader="/react-website/"/>
-        </div>
-    )
+    if (isLoading) {
+        return (
+            <div className="homepage">
+                <div className="movies-header">
+                    <h1>{"Loading movies..."}</h1>
+                </div>
+            </div>
+        )
+    }
+
+    else {
+        return (
+            <div className="homepage">
+                <MovieList listName="Explore" movieList={movies}/>
+                <PageButtons numItems={moviesNum} itemsXPage={itemsXPage} urlHeader="/react-website/"/>
+            </div>
+        )
+    }
 }

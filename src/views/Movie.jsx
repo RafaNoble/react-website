@@ -41,12 +41,22 @@ export default function Movie() {
             navigate("notfound");
     }, [movie, navigate]);
     
-    let movie_list = (isLoading ? [] : similarFilms);
+    if (isLoading) {
+        return (
+            <div className="movie">
+                <div className="movie-header">
+                    <h1>{"Loading movie details..."}</h1>
+                </div>
+            </div>
+        )
+    }
 
-    return (
-        <div className="movie">
-            {movie !== undefined && <MovieInfo movie={movie}/>}
-            {movie !== undefined && <MovieList listName="Related" movieList={movie_list}/>}
-        </div>
-    )
+    else {
+        return (
+            <div className="movie">
+                {movie !== undefined && <MovieInfo movie={movie}/>}
+                {movie !== undefined && <MovieList listName="Related" movieList={similarFilms}/>}
+            </div>
+        )
+    }
 }

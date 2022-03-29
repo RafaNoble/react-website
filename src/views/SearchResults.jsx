@@ -13,13 +13,15 @@ export default function SearchResults() {
     useEffect(() => {
         let isMounted = true;
 
+        setIsLoading(true);
+
         try {
             fetch(serverHeader + `/api/movie/${params.query}`)
             .then((response) => response.json())
             .then((data) => {
                 if (isMounted) {
                     setMovieList(data.content);  
-                    setIsLoading(false);   
+                    setIsLoading(false);
                 }
             });
         }
@@ -32,24 +34,34 @@ export default function SearchResults() {
         };
     }, [params.query]);
 
-    let movie_list = (isLoading ? [] : movieList);
-
-    return (
-        <div className="results">
-            {movie_list !== undefined && movie_list.length > 0 ?
-            (
-                <div>
-                    {params.p === undefined ? (<MovieList listName={`Results for '${params.query}'`} movieList={movie_list.slice(0, itemsXPage)}/>)
-                                            : (<MovieList listName={`Results for '${params.query}'`} movieList={movie_list.slice((params.p - 1) * itemsXPage, params.p * itemsXPage)}/>)}
-                    <PageButtons numItems={movie_list.length} itemsXPage={itemsXPage} urlHeader={`/react-website/search/${params.query}/`}/>
+    if (isLoading) {
+        return (
+            <div className="results">
+                <div className="results-header">
+                    <h1>{"Loading results..."}</h1>
                 </div>
-            )
-            :
-            (
-                <div className="no-results-header">
-                    <h1>{`No results for '${params.query}'`}</h1>
-                </div>
-            )}
-        </div>
-    )
+            </div>
+        )
+    }
+    
+    else {
+        return (
+            <div className="results">
+                {movieList !== undefined && movieList.length > 0 ?
+                (
+                    <div>
+                        {params.p === undefined ? (<MovieList listName={`Results for '${params.query}'`} movieList={movieList.slice(0, itemsXPage)}/>)
+                                                : (<MovieList listName={`Results for '${params.query}'`} movieList={movieList.slice((params.p - 1) * itemsXPage, params.p * itemsXPage)}/>)}
+                        <PageButtons numItems={movieList.length} itemsXPage={itemsXPage} urlHeader={`/react-website/search/${params.query}/`}/>
+                    </div>
+                )
+                :
+                (
+                    <div className="results-header">
+                        <h1>{`No results for '${params.query}'`}</h1>
+                    </div>
+                )}
+            </div>
+        )
+    }
 }
