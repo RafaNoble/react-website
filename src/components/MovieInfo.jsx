@@ -10,40 +10,20 @@ export default function MovieInfo(props) {
     useEffect(() => {
         let genres = '';
                     
-        if (movie !== undefined && movie.genres !== undefined && movie.genres.length !== 0) {
-            let genresList = movie.genres;
+        if (movie !== undefined && movie.genres !== undefined && movie.genres !== "[]") {
 
-            var aux = genresList.slice(1, genresList.length - 1);
-            var stringGenres = aux.replaceAll('},', '};');
-            var currentline = stringGenres.split("; ");
+            let genresList = [];
+            
+            movie.genres.substring(2, movie.genres.length - 1).split(", {").forEach( (genres) => {
+                genresList.push(JSON.parse(('{' + genres).replaceAll('\'', "\"")))
+            });
 
-            let arrayGenres = [];
-
-            for (var i = 0;i < currentline.length ;++i) {
-                var singleGenre = currentline[i];
-                
-                singleGenre = singleGenre.replaceAll('{', '[');
-                singleGenre = singleGenre.replaceAll('}', ']');
-                singleGenre = singleGenre.replaceAll('[', '[[');
-                singleGenre = singleGenre.replaceAll(']', ']]');
-                singleGenre = singleGenre.replaceAll('\'', '"');
-                singleGenre = singleGenre.replaceAll(' ', '');
-                singleGenre = singleGenre.replaceAll(",", "],[");
-                singleGenre = singleGenre.replaceAll(":", ",");
-
-                var genreMap = new Map(JSON.parse(singleGenre));
-
-                arrayGenres.push(genreMap);
-            }
-
-            genres += arrayGenres.map((genre) => ' ' + genre.get('name'));
+            genres += genresList.map((genre) => ' ' + genre.name);
         }
-        
         else
             genres = <p>N/A</p>;
-        
-        setGenres(genres);
 
+        setGenres(genres);
     }, [movie]);
     
     return (
