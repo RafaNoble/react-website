@@ -5,18 +5,18 @@ import { serverHeader, itemsXPage } from '../assets/constants';
 import MovieList from '../components/MovieList';
 import PageButtons from '../components/PageButtons';
 
-export default function SearchResults() {
+export default function SearchResults(props) {
     const [isLoading, setIsLoading] = useState(true);
     const [movieList, setMovieList] = useState({});
     const params = useParams();
-    
+
     useEffect(() => {
         let isMounted = true;
 
         setIsLoading(true);
 
         try {
-            fetch(serverHeader + `/api/movie/${params.query}`)
+            fetch(serverHeader + "/api/movie/" + (props.model > 1 ? "" : `similar/${props.model}/`) + params.query)
             .then((response) => response.json())
             .then((data) => {
                 if (isMounted) {
@@ -32,7 +32,7 @@ export default function SearchResults() {
         return () => {
             isMounted = false
         };
-    }, [params.query]);
+    }, [props.model, params.query]);
 
     if (isLoading) {
         return (

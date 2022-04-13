@@ -1,5 +1,4 @@
 .search-bar {
-    padding-left: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,8 +14,6 @@
     font-size: 20px;
     color: whitesmoke;
     background-color: rgb(75, 78, 90);
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
 }
 
 .search-bar-button {
@@ -28,6 +25,7 @@
     background-color: darkred;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
+    transition: all 200ms ease;
 }
 
 .search-bar-button:hover {

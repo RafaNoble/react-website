@@ -5,6 +5,7 @@
     height: 30px;
     background-color: darkred;
     border-radius: 15px;
+    transition: all 200ms ease;
 }
 
 .home-button:hover {

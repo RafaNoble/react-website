@@ -32,7 +32,7 @@ export default function SearchBar() {
                 value={value}
                 onInput={(e) => setValue(e.target.value)}
                 type="text"
-                placeholder="Search by title"
+                placeholder="Search..."
                 name="s"
             />
             <button
