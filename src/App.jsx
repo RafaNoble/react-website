@@ -13,7 +13,6 @@ export default function App() {
 
     function handleCallback(value) {
         setSelectedValue(value);
-        
     }
 
     return (
