@@ -13,6 +13,8 @@ export default function Homepage() {
     let page = (params.p === undefined ? 0 : parseInt(params.p) - 1);
 
     useEffect(() => {
+        setIsLoading(true);
+
         try {
             fetch(serverHeader + `/api/movie/page/${page}`, {mode: 'cors'})
             .then((response) => response.json())

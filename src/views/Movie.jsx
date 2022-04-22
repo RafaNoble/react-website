@@ -16,6 +16,8 @@ export default function Movie() {
     useEffect(() => {
         let isMounted = true;
 
+        setIsLoading(true);
+
         try {
             fetch(serverHeader + `/api/movie/${params.id}`)
             .then((response) => response.json())

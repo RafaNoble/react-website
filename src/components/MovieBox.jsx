@@ -4,7 +4,6 @@ import { header } from '../assets/constants';
 import ImgNotAvailable from '../assets/Image-Not-Available.png';
 
 export default function MovieBox(props) {
-
     return (
         <div className="movie-list-box">
             <Link className="movie-list-box-link" to={`/react-website/movie/${props.id}`}>

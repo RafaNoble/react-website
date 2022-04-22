@@ -4,6 +4,8 @@
 
 .movie-list-header {
     padding-left: 12%;
+    animation: fadeIn 0.6s;
+    -webkit-animation: fadeIn 0.6s;
 }
 
 .movie-list-content {
@@ -14,4 +16,24 @@
     margin: auto;
     max-width: 1500px;
     max-height: fit-content;
+    animation: fadeIn 2.6s;
+    -webkit-animation: fadeIn 2.6s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0.0;
+    }
+    100% {
+        opacity: 1.0;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0.0;
+    }
+    100% {
+        opacity: 1.0;
+    }
 }
