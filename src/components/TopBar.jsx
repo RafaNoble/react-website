@@ -5,26 +5,51 @@ import React from 'react';
 import HomeButton from '../components/HomeButton';
 import Dropdown from 'react-dropdown';
 import SearchBar from '../components/SearchBar';
+import Select from 'react-select';
 
-const options = [
+const modelOptions = [
     { value: 1000, label: 'Search by title' },
     { value: 0, label: 'Search by text (Model 0)' },
     { value: 1, label: 'Search by text (Model 1)' }
 ];
 
-export default function TopBar(props) {
-    const [selectedValue, setSelectedValue] = useState(options[0]);
+const genreOptions = [
+    { value: 0, label: 'Action' },
+    { value: 1, label: 'Comedy' },
+    { value: 2, label: 'Drama' }
+];
 
-    function onSelect(value) {
-        setSelectedValue(value);
-        props.parentCallback(value.value);
+export default function TopBar(props) {
+    const [selectedModel, setSelectedModel] = useState(modelOptions[0]);
+    const [selectedGenres, setSelectedGenres] = useState([]);
+
+    function onSelectModel(model) {
+        setSelectedModel(model);
+        props.parentModelCallback(model.value);
+    }
+
+    function onSelectGenre(genre) {
+        setSelectedGenres(genre);
+        props.parentGenresCallback(selectedGenres);
     }
 
     return (
-        <div className="top-bar">
-            <HomeButton/>
-            <Dropdown options={options} value={selectedValue} onChange={onSelect}/>
-            <SearchBar/>
+        <div>
+            <div className="top-bar">
+                <HomeButton/>
+                <Dropdown options={modelOptions} value={selectedModel} onChange={onSelectModel}/>
+                <SearchBar/>
+            </div>
+            <div className="genre-filter">
+                <Select
+                    className="basic-multi-select"
+                    classNamePrefix="select"
+                    isMulti
+                    options={genreOptions}
+                    placeholder="Add genre..."
+                    onChange={onSelectGenre}
+                />
+            </div>
         </div>
     )
 }

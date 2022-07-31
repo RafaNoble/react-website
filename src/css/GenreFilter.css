@@ -1,0 +1,8 @@
+.filter-container {
+    margin-left: 172px;
+}
+
+.filter-box {
+    position: absolute;
+    background-color: darkred;
+}

@@ -9,20 +9,27 @@ import Movie from './views/Movie';
 import NotFound from './views/NotFound';
 
 export default function App() {
-    const [selectedValue, setSelectedValue] = useState(1000);
+    const [selectedModel, setSelectedModel] = useState(1000);
+    const [selectedGenres, setSelectedGenres] = useState([]);
 
-    function handleCallback(value) {
-        setSelectedValue(value);
+    function handleModelCallback(model) {
+        setSelectedModel(model);
     }
+
+    function handleGenresCallback(genres) {
+        setSelectedGenres(genres);
+    }
+
+    console.log(selectedGenres);
 
     return (
         <BrowserRouter>
             <ScrollToTop/>
-            <TopBar parentCallback = {handleCallback}/>
+            <TopBar parentModelCallback={handleModelCallback} parentGenresCallback={handleGenresCallback}/>
             <Routes>
                 <Route path="/react-website/" element={<Homepage/>}/>
                 <Route path="/react-website/page/:p" element={<Homepage/>}/>
-                <Route path="/react-website/search/:query" element={<SearchResults model={selectedValue}/>}/>
+                <Route path="/react-website/search/:query" element={<SearchResults model={selectedModel} filters={selectedGenres}/>}/>
                 <Route path="/react-website/search/:query/page/:p" element={<SearchResults/>}/>
                 <Route path="/react-website/movie/:id" element={<Movie/>}/>
                 <Route path="*" element={<NotFound/>}/>
