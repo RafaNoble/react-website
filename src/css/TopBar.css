@@ -16,7 +16,8 @@
     padding-top: 5px;
     margin-left: 5%;
     margin-right: 5%;
-    width: 100%;
+    max-width: 800px;
+    width: 80%;
 }
 .select__control.css-srmejm-control {
     border-top-left-radius: 15px;
