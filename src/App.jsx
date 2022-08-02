@@ -9,7 +9,7 @@ import Movie from './views/Movie';
 import NotFound from './views/NotFound';
 
 export default function App() {
-    const [selectedModel, setSelectedModel] = useState(1000);
+    const [selectedModel, setSelectedModel] = useState();
     const [selectedGenres, setSelectedGenres] = useState([]);
 
     function handleModelCallback(model) {
@@ -19,8 +19,6 @@ export default function App() {
     function handleGenresCallback(genres) {
         setSelectedGenres(genres);
     }
-
-    console.log(selectedGenres);
 
     return (
         <BrowserRouter>

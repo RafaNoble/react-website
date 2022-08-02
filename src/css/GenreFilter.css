@@ -1,8 +1,9 @@
-.filter-container {
-    margin-left: 172px;
-}
-
-.filter-box {
-    position: absolute;
-    background-color: darkred;
+.basic-multi-select {
+    border: none;
+    outline: none;
+    margin-top: 5px;
+    margin-left: 5%;
+    margin-right: 5%;
+    max-width: 800px;
+    width: 80%;
 }

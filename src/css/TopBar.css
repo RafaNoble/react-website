@@ -1,4 +1,4 @@
-.top-bar {
+.top-bar-search-bar {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,19 +9,4 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-}
-.basic-multi-select {
-    border: none;
-    outline: none;
-    padding-top: 5px;
-    margin-left: 5%;
-    margin-right: 5%;
-    max-width: 800px;
-    width: 80%;
-}
-.select__control.css-srmejm-control {
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
 }
