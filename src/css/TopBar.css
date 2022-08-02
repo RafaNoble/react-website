@@ -5,10 +5,20 @@
 }
 
 .genre-filter {
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .basic-multi-select {
+    border: none;
+    outline: none;
+    padding-top: 5px;
     margin: 0 auto;
-    align-items: center;
-    width: 50%;
+    width: 60%;
+}
+.select__control.css-srmejm-control {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
 }

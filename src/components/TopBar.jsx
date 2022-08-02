@@ -6,6 +6,7 @@ import HomeButton from '../components/HomeButton';
 import Dropdown from 'react-dropdown';
 import SearchBar from '../components/SearchBar';
 import Select from 'react-select';
+import { FaBluetooth } from 'react-icons/fa';
 
 const modelOptions = [
     { value: 1000, label: 'Search by title' },
@@ -40,21 +41,31 @@ export default function TopBar(props) {
     const [selectedGenres, setSelectedGenres] = useState([]);
     const customStyles = {
         option: (provided, state) => ({
-          ...provided,
-          borderBottom: '1px dotted pink',
-          color: '#FFF',
-          backgroundColor: 'darkred',
-          padding: 5,
+            ...provided,
+            color: '#FFF',
+            backgroundColor: state.isFocused ? 'red' : 'darkred',
+            padding: 5
         }),
-        control: () => ({
+        control: (provided) => ({
+            ...provided,
+            backgroundColor: 'darkred',
+            border: 'darkred'
+        }),   
+        menu: (provided) => ({
+            ...provided,
+            backgroundColor: 'darkred'
+        }),      
+        multiValue: (provided, { data }) => {
+            return {
+                ...provided,
+                backgroundColor: '#4b4e5a'
+            }        
+        },
+        multiValueLabel: (styles, { data }) => ({
+            ...styles,
+            color: 'white',
         }),
-        singleValue: (provided, state) => {
-          const opacity = state.isDisabled ? 0.5 : 1;
-          const transition = 'opacity 300ms';
-      
-          return { ...provided, opacity, transition };
-        }
-      }
+    }
 
     function onSelectModel(model) {
         setSelectedModel(model);
@@ -76,6 +87,7 @@ export default function TopBar(props) {
             <div className="genre-filter">
                 <Select
                     styles={customStyles}
+                    closeMenuOnSelect={false}
                     className="basic-multi-select"
                     classNamePrefix="select"
                     isMulti
