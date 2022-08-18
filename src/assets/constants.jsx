@@ -1,5 +1,5 @@
 export const header = "https://image.tmdb.org/t/p/w500";
 
-export const serverHeader = "https://17a2-83-57-3-194.ngrok.io";
+export const serverHeader = "http://localhost:8081";
 
 export const itemsXPage = 50;

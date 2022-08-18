@@ -8,6 +8,7 @@ export default function MovieInfo(props) {
     let movie = props.movie;
 
     useEffect(() => {
+
         let genres = '';
                     
         if (movie !== undefined && movie.genres !== undefined && movie.genres !== "[]") {
@@ -24,11 +25,12 @@ export default function MovieInfo(props) {
             genres = <p>N/A</p>;
 
         setGenres(genres);
+        
     }, [movie]);
     
     return (
         <div className="movie-info">
-            {movie.poster_path ? (<img className="movie-info-img" src={header + movie.poster_path} alt={movie.original_title}/>)
+            {movie.poster_path ? (<img className="movie-info-img" src={header.concat(movie.poster_path)} alt={movie.original_title}/>)
                                : (<img className="movie-info-img" src={ImgNotAvailable} alt="not available"/>)}
             <div className="movie-info-box">
                 <div className="movie-info-header"><h1>{movie.original_title}</h1></div>
