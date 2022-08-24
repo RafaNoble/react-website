@@ -20,6 +20,7 @@ export default function MovieInfo(props) {
             });
 
             genres += genresList.map((genre) => ' ' + genre.name);
+            
         }
         else
             genres = <p>N/A</p>;
@@ -30,8 +31,8 @@ export default function MovieInfo(props) {
     
     return (
         <div className="movie-info">
-            {movie.poster_path ? (<img className="movie-info-img" src={header.concat(movie.poster_path)} alt={movie.original_title}/>)
-                               : (<img className="movie-info-img" src={ImgNotAvailable} alt="not available"/>)}
+            {movie.poster_path ? (<img loading='lazy' className="movie-info-img" src={header.concat(movie.poster_path)} alt={movie.original_title}/>)
+                               : (<img loading='lazy' className="movie-info-img" src={ImgNotAvailable} alt="not available"/>)}
             <div className="movie-info-box">
                 <div className="movie-info-header"><h1>{movie.original_title}</h1></div>
                 <div className="movie-info-content">

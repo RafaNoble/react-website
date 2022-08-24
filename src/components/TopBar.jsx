@@ -10,12 +10,13 @@ import GenreFilter from '../components/GenreFilter';
 const modelOptions = [
     { value: 0, label: 'Search by text (Model 0)' },
     { value: 1, label: 'Search by text (Model 1)' },
-    { value: 2, label: 'Search by title' }
+    { value: 2, label: 'Search by title' },
+    { value: 3, label: 'Search by actor' }
 ];
 
 export default function TopBar(props) {
     const [selectedModel, setSelectedModel] = useState(modelOptions[2]);
-
+    
     function onSelectModel(model) {
         setSelectedModel(model);
         props.parentModelCallback(model.value);
