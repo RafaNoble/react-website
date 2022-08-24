@@ -16,7 +16,7 @@ export default function SearchResults(props) {
         setIsLoading(true);
 
         try {
-            fetch(serverHeader + "/api/movie/" + (props.model > 1 ? "" : `similar/${props.model}/`) + params.query)
+            fetch(serverHeader + "/api/movie/" + (props.model > 1 ? "" : `similar/${props.model}/`) + params.query + '/')
             .then((response) => response.json())
             .then((data) => {
                 if (isMounted) {

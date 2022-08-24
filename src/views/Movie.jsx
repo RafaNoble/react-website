@@ -19,7 +19,7 @@ export default function Movie() {
         setIsLoading(true);
 
         try {
-            fetch(serverHeader + `/api/movie/${params.id}`)
+            fetch(serverHeader + `/api/movie/${params.id}/`)
             .then((response) => response.json())
             .then((data) => {
                 if (isMounted) {

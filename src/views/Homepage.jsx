@@ -16,7 +16,7 @@ export default function Homepage() {
         setIsLoading(true);
 
         try {
-            fetch(serverHeader + `/api/movie/page/${page}`, {mode: 'cors'})
+            fetch(serverHeader + `/api/movie/page/${page}/`, {mode: 'cors'})
             .then((response) => response.json())
             .then((data) => {
                 setMovies(data.content);

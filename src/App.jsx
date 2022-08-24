@@ -1,6 +1,7 @@
 import './css/App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { serverHeader } from './assets/constants';
 import ScrollToTop from './components/ScrollToTop';
 import TopBar from './components/TopBar';
 import Homepage from './views/Homepage';
@@ -11,6 +12,7 @@ import NotFound from './views/NotFound';
 export default function App() {
     const [selectedModel, setSelectedModel] = useState();
     const [selectedGenres, setSelectedGenres] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     function handleModelCallback(model) {
         setSelectedModel(model);
@@ -19,6 +21,24 @@ export default function App() {
     function handleGenresCallback(genres) {
         setSelectedGenres(genres);
     }
+
+    
+    useEffect(() => {
+        setIsLoaded(true);
+        if (!isLoaded) {
+            try {
+                fetch(serverHeader + '/api/movie/genres/')
+                .then((response) => response.json())
+                .then((data) => {
+                    // TODO
+                });
+            }
+            catch(error) {
+                console.log(error);
+            }
+        }
+    }, []);
+ 
 
     return (
         <BrowserRouter>
