@@ -13,6 +13,7 @@ export default function App() {
     const [selectedModel, setSelectedModel] = useState();
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [genres, setGenres] = useState(false);
 
     function handleModelCallback(model) {
         setSelectedModel(model);
@@ -22,28 +23,33 @@ export default function App() {
         setSelectedGenres(genres);
     }
 
-    
     useEffect(() => {
-        setIsLoaded(true);
+        let isMounted = true;
         if (!isLoaded) {
             try {
-                fetch(serverHeader + '/api/movie/genres/')
+                fetch(serverHeader + '/api/genres/')
                 .then((response) => response.json())
                 .then((data) => {
-                    // TODO
+                    if (isMounted) {
+                        setGenres(data.content);  
+                        setIsLoaded(true);
+                    }
                 });
             }
             catch(error) {
                 console.log(error);
             }
+            return () => {
+                isMounted = false
+            };
         }
-    }, []);
- 
 
+    }, []);
+    
     return (
         <BrowserRouter>
             <ScrollToTop/>
-            <TopBar parentModelCallback={handleModelCallback} parentGenresCallback={handleGenresCallback}/>
+            <TopBar parentModelCallback={handleModelCallback} parentGenresCallback={handleGenresCallback} genres={genres}/>
             <Routes>
                 <Route path="/react-website/" element={<Homepage/>}/>
                 <Route path="/react-website/page/:p" element={<Homepage/>}/>
@@ -54,4 +60,5 @@ export default function App() {
             </Routes>
         </BrowserRouter>
     )
+  
 }

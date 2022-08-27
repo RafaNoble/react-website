@@ -34,7 +34,7 @@ export default function TopBar(props) {
                 <SearchBar/>
             </div>
             <div className="genre-filter">
-                <GenreFilter parentCallback={handleCallback}/>
+                <GenreFilter parentCallback={handleCallback} genres={props.genres}/>
             </div>
         </div>
     )
