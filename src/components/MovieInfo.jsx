@@ -4,22 +4,24 @@ import { header } from '../assets/constants';
 import ImgNotAvailable from '../assets/Image-Not-Available.png';
 
 export default function MovieInfo(props) {
-    const [genres, setGenres] = useState("");
     let movie = props.movie;
+    
 
-    useEffect(() => {
+    /*useEffect(() => {
 
         let genres = '';
-                    
-        if (movie !== undefined && movie.genres !== undefined && movie.genres !== "[]") {
+        console.log(props.genres)    
+        if (movie !== undefined && movie.genres !== undefined && movie.genres !== "[]" && defaultGenres !== false) {
 
             let genresList = [];
             
-            movie.genres.substring(2, movie.genres.length - 1).split(", {").forEach( (genres) => {
-                genresList.push(JSON.parse(('{' + genres).replaceAll('\'', "\"")))
-            });
+            console.log(movie.genres);
 
-            genres += genresList.map((genre) => ' ' + genre.name);
+            movie.genres.substring(2, movie.genres.length - 1).split(", ").forEach( (id) => {
+                genresList.push(defaultGenres.find(genre => genre.value == id));
+            });
+            console.log(genresList);
+            genres += genresList.map((genre) => ' ' + genre.label);
             
         }
         else
@@ -27,7 +29,7 @@ export default function MovieInfo(props) {
 
         setGenres(genres);
         
-    }, [movie]);
+    }, [movie]);*/
     
     return (
         <div className="movie-info">
@@ -45,7 +47,7 @@ export default function MovieInfo(props) {
                     </div>
                     <div className="movie-info-genre">
                         <h2>Genre</h2>
-                        <div className="movie-info-genre-content">{genres}</div>                        
+                        <div className="movie-info-genre-content">{props.genres}</div>                        
                     </div>
                     <div className="movie-info-runtime">
                         <div className="movie-info-runtime-header"><h2>Runtime</h2></div>
