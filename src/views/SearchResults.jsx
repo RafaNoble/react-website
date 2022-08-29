@@ -15,12 +15,49 @@ export default function SearchResults(props) {
 
         setIsLoading(true);
 
+        if (params.query === undefined)
+            params.query = "";
+
+        console.log(props.model);
+        console.log(props.mode);
+        console.log(props.filters);
         try {
-            fetch(serverHeader + "/api/movie/" + (props.model > 1 ? "" : `similar/${props.model}/`) + params.query + '/')
-            .then((response) => response.json())
+
+            let _endpoint = ""
+            let _headers = ""
+            let _method = ""
+            let _body = ""
+            
+            //Search By Model
+            if (props.model < 2) {
+                _endpoint = '/api/movie/similar/'
+                _headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
+                _method = "POST"
+                _body = JSON.stringify({text: params.query, genres: props.filters})
+            }
+            //Search By Title
+            else if(props.model == 2) {
+                _endpoint = '/api/movie/'
+                _headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
+                _method = "POST"
+                _body = JSON.stringify({title: params.query, genres: props.filters, mode: props.mode})
+            }
+            //Search By Actors
+            else if(props.model == 3) {
+                _endpoint = '/api/movie/actors/'
+                _headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
+                _method = "POST"
+                _body = JSON.stringify({actors: params.query, genres: props.filters, mode: props.mode})
+            }
+
+            fetch(serverHeader + _endpoint, {
+                headers: _headers,
+                method: _method,
+                body: _body
+            }).then((response) => response.json())
             .then((data) => {
                 if (isMounted) {
-                    setMovieList(data.content);  
+                    setMovieList(data.content);
                     setIsLoading(false);
                 }
             });

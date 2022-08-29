@@ -1,5 +1,6 @@
 import '../css/TopBar.css';
 import '../css/Dropdown.css';
+import '../css/Flipswitch.css';
 import { useState } from 'react';
 import React from 'react';
 import HomeButton from '../components/HomeButton';
@@ -16,14 +17,27 @@ const modelOptions = [
 
 export default function TopBar(props) {
     const [selectedModel, setSelectedModel] = useState(modelOptions[2]);
-    
+    const [checked, setChecked] = useState(false);
+
     function onSelectModel(model) {
         setSelectedModel(model);
         props.parentModelCallback(model.value);
     }
 
     function handleCallback(genres) {
-        props.parentGenresCallback(genres);
+        let arrayGenre = [];
+        genres.forEach(element => {
+            arrayGenre.push(element.value);
+        });
+        props.parentGenresCallback(arrayGenre);
+    }
+
+    function onSelectMode() {
+        setChecked(!checked);
+        if (!checked === false)
+            props.parentModeCallback("Query");
+        else
+            props.parentModeCallback("Algorithm");  
     }
 
     return (
@@ -35,6 +49,7 @@ export default function TopBar(props) {
             </div>
             <div className="genre-filter">
                 <GenreFilter parentCallback={handleCallback} genres={props.genres}/>
+                <input type="checkbox" className="flipswitch" checked={checked} onChange={onSelectMode}/>
             </div>
         </div>
     )

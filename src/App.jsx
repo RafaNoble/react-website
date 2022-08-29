@@ -16,10 +16,11 @@ const genresPromise = fetch(serverHeader + '/api/genres/')
     });
 
 export default function App() {
-    const [selectedModel, setSelectedModel] = useState();
+    const [selectedModel, setSelectedModel] = useState(2);
     const [selectedGenres, setSelectedGenres] = useState([]);
+    const [selectedMode, setSelectedMode] = useState("Query");
     const [genres, setGenres] = useState([]);
-    
+
     function handleModelCallback(model) {
         setSelectedModel(model);
     }
@@ -28,16 +29,21 @@ export default function App() {
         setSelectedGenres(genres);
     }
 
+    function handleModeCallback(mode) {
+        setSelectedMode(mode);
+    }
+
     genresPromise.then((data) => { setGenres(data); })
 
     return (
         <BrowserRouter>
             <ScrollToTop/>
-            <TopBar parentModelCallback={handleModelCallback} parentGenresCallback={handleGenresCallback} genres={genres}/>
+            <TopBar parentModelCallback={handleModelCallback} parentGenresCallback={handleGenresCallback} parentModeCallback={handleModeCallback} genres={genres}/>
             <Routes>
                 <Route path="/react-website/" element={<Homepage/>}/>
                 <Route path="/react-website/page/:p" element={<Homepage/>}/>
-                <Route path="/react-website/search/:query" element={<SearchResults model={selectedModel} filters={selectedGenres}/>}/>
+                <Route path="/react-website/search/" element={<SearchResults model={selectedModel} filters={selectedGenres} mode={selectedMode}/>}/>
+                <Route path="/react-website/search/:query" element={<SearchResults model={selectedModel} filters={selectedGenres} mode={selectedMode}/>}/>
                 <Route path="/react-website/search/:query/page/:p" element={<SearchResults/>}/>
                 <Route path="/react-website/movie/:id" element={<Movie genres={genres}/>}/>
                 <Route path="*" element={<NotFound/>}/>

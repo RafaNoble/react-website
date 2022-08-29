@@ -37,7 +37,7 @@ export default function GenreFilter(props) {
 
     function onSelectGenre(genre) {
         setSelectedGenres(genre);
-        props.parentCallback(selectedGenres);
+        props.parentCallback(genre);
     }
 
     return (

@@ -30,7 +30,7 @@ export default function Movie(props) {
                     if (data.content[0] !== undefined && data.content[0].genres !== undefined && data.content[0].genres !== "[]") {
                         let genres = '';
                         let genresList = [];
-                        data.content[0].genres.substring(2, data.content[0].genres.length - 1).split(", ").forEach( (id) => {
+                        data.content[0].genres.substring(1, data.content[0].genres.length - 1).split(", ").forEach( (id) => {
                             genresList.push(defaultGenres.find(genre => genre.value == id));
                         });
                         genres += genresList.map((genre) => ' ' + genre.label);
