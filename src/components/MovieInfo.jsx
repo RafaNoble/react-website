@@ -6,31 +6,6 @@ import ImgNotAvailable from '../assets/Image-Not-Available.png';
 export default function MovieInfo(props) {
     let movie = props.movie;
     
-
-    /*useEffect(() => {
-
-        let genres = '';
-        console.log(props.genres)    
-        if (movie !== undefined && movie.genres !== undefined && movie.genres !== "[]" && defaultGenres !== false) {
-
-            let genresList = [];
-            
-            console.log(movie.genres);
-
-            movie.genres.substring(2, movie.genres.length - 1).split(", ").forEach( (id) => {
-                genresList.push(defaultGenres.find(genre => genre.value == id));
-            });
-            console.log(genresList);
-            genres += genresList.map((genre) => ' ' + genre.label);
-            
-        }
-        else
-            genres = <p>N/A</p>;
-
-        setGenres(genres);
-        
-    }, [movie]);*/
-    
     return (
         <div className="movie-info">
             {movie.poster_path ? (<img loading='lazy' className="movie-info-img" src={header.concat(movie.poster_path)} alt={movie.original_title}/>)

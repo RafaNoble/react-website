@@ -11,9 +11,10 @@ export default function Movie(props) {
     const [movie, setMovie] = useState({});
     const [similarFilms, setSimilarFilms] = useState([]);
     const [genres, setGenres] = useState("");
+    const defaultGenres = props.genres;
     const params = useParams();
     const navigate = useNavigate();
-    let defaultGenres = props.genres;
+
     useEffect(() => {
         let isMounted = true;
 
@@ -26,17 +27,18 @@ export default function Movie(props) {
                 if (isMounted) {
                     setMovie(data.content[0]);
                     setSimilarFilms(data.content.slice(1));
-                    let genres = '';
-                    let genresList = [];
-                    console.log(defaultGenres);
-                    console.log(data.content[0].genres);
-                    data.content[0].genres.substring(2, data.content[0].genres.length - 1).split(", ").forEach( (id) => {
-                        genresList.push(defaultGenres.find(genre => genre.value == id));
-                    });
-                    genres += genresList.map((genre) => ' ' + genre.label);
-                    setGenres(genres);
+                    if (data.content[0] !== undefined && data.content[0].genres !== undefined && data.content[0].genres !== "[]") {
+                        let genres = '';
+                        let genresList = [];
+                        data.content[0].genres.substring(2, data.content[0].genres.length - 1).split(", ").forEach( (id) => {
+                            genresList.push(defaultGenres.find(genre => genre.value == id));
+                        });
+                        genres += genresList.map((genre) => ' ' + genre.label);
+                        setGenres(genres);
+                    } else {
+                        setGenres("N/A");
+                    }
                     setIsLoading(false);
-                    // Todo genres
                 }
             });
         }

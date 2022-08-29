@@ -9,12 +9,17 @@ import Movie from './views/Movie';
 import NotFound from './views/NotFound';
 import { serverHeader } from './assets/constants';
 
+const genresPromise = fetch(serverHeader + '/api/genres/')
+    .then((response) => response.json())
+    .then((data) => {
+        return data.content;
+    });
+
 export default function App() {
     const [selectedModel, setSelectedModel] = useState();
     const [selectedGenres, setSelectedGenres] = useState([]);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [genres, setGenres] = useState();
-
+    const [genres, setGenres] = useState([]);
+    
     function handleModelCallback(model) {
         setSelectedModel(model);
     }
@@ -23,29 +28,8 @@ export default function App() {
         setSelectedGenres(genres);
     }
 
-    useEffect(() => {
-        let isMounted = true;
-        if (!isLoaded) {
-            try {
-                fetch(serverHeader + '/api/genres/')
-                .then((response) => response.json())
-                .then((data) => {
-                    if (isMounted) {
-                        setGenres(data.content);  
-                        setIsLoaded(true);
-                    }
-                });
-            }
-            catch(error) {
-                console.log(error);
-            }
-            return () => {
-                isMounted = false
-            };
-        }
+    genresPromise.then((data) => { setGenres(data); })
 
-    }, []);
-    console.log(genres);
     return (
         <BrowserRouter>
             <ScrollToTop/>
