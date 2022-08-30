@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Select from 'react-select';
 
 export default function GenreFilter(props) {
-    const [selectedGenres, setSelectedGenres] = useState([]);
+    
     const customStyles = {
         input: (provided) => ({
             ...provided,
@@ -36,7 +36,6 @@ export default function GenreFilter(props) {
     }
 
     function onSelectGenre(genre) {
-        setSelectedGenres(genre);
         props.parentCallback(genre);
     }
 

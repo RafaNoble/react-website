@@ -21,6 +21,10 @@ export default function TopBar(props) {
 
     function onSelectModel(model) {
         setSelectedModel(model);
+        if (model.value < 2) {
+            props.parentModeCallback("Algorithm");
+            setChecked(true);
+        }
         props.parentModelCallback(model.value);
     }
 
@@ -33,11 +37,17 @@ export default function TopBar(props) {
     }
 
     function onSelectMode() {
-        setChecked(!checked);
-        if (!checked === false)
-            props.parentModeCallback("Query");
-        else
-            props.parentModeCallback("Algorithm");  
+        if (selectedModel.value > 1) {
+            if (checked === false)
+                props.parentModeCallback("Algorithm");
+            else
+                props.parentModeCallback("Query");
+            setChecked(!checked);
+        }
+    }
+
+    function handleSearchCallback(searching) {
+        props.searchCallBack(searching);
     }
 
     return (
@@ -45,7 +55,7 @@ export default function TopBar(props) {
             <div className="top-bar-search-bar">
                 <HomeButton/>
                 <Dropdown options={modelOptions} value={selectedModel} onChange={onSelectModel}/>
-                <SearchBar/>
+                <SearchBar searchCallBack={handleSearchCallback} search={props.search}/>
             </div>
             <div className="genre-filter">
                 <GenreFilter parentCallback={handleCallback} genres={props.genres}/>

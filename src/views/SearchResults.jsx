@@ -10,6 +10,8 @@ export default function SearchResults(props) {
     const [movieList, setMovieList] = useState({});
     const params = useParams();
 
+    //console.log(props.searching);
+
     useEffect(() => {
         let isMounted = true;
 
@@ -18,9 +20,9 @@ export default function SearchResults(props) {
         if (params.query === undefined)
             params.query = "";
 
-        console.log(props.model);
+        /*console.log(props.model);
         console.log(props.mode);
-        console.log(props.filters);
+        console.log(props.filters);*/
         try {
 
             let _endpoint = ""
@@ -36,20 +38,20 @@ export default function SearchResults(props) {
                 _body = JSON.stringify({text: params.query, genres: props.filters})
             }
             //Search By Title
-            else if(props.model == 2) {
+            else if(props.model === 2) {
                 _endpoint = '/api/movie/'
                 _headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
                 _method = "POST"
                 _body = JSON.stringify({title: params.query, genres: props.filters, mode: props.mode})
             }
             //Search By Actors
-            else if(props.model == 3) {
+            else if(props.model === 3) {
                 _endpoint = '/api/movie/actors/'
                 _headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
                 _method = "POST"
                 _body = JSON.stringify({actors: params.query, genres: props.filters, mode: props.mode})
             }
-
+            
             fetch(serverHeader + _endpoint, {
                 headers: _headers,
                 method: _method,
@@ -69,7 +71,7 @@ export default function SearchResults(props) {
         return () => {
             isMounted = false
         };
-    }, [props.model, params.query]);
+    }, [props.searching, params.query]);
 
     if (isLoading) {
         return (
