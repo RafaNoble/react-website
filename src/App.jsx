@@ -16,7 +16,7 @@ const genresPromise = fetch(serverHeader + '/api/genres/')
     });
 
 export default function App() {
-    const [selectedModel, setSelectedModel] = useState(2);
+    const [selectedModel, setSelectedModel] = useState(1);
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [selectedMode, setSelectedMode] = useState("Query");
     const [genres, setGenres] = useState([]);

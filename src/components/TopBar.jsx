@@ -9,19 +9,18 @@ import SearchBar from '../components/SearchBar';
 import GenreFilter from '../components/GenreFilter';
 
 const modelOptions = [
-    { value: 0, label: 'Search by text (Model 0)' },
-    { value: 1, label: 'Search by text (Model 1)' },
-    { value: 2, label: 'Search by title' },
-    { value: 3, label: 'Search by actor' }
+    { value: 0, label: 'Search by text' },
+    { value: 1, label: 'Search by title' },
+    { value: 2, label: 'Search by actor' }
 ];
 
 export default function TopBar(props) {
-    const [selectedModel, setSelectedModel] = useState(modelOptions[2]);
+    const [selectedModel, setSelectedModel] = useState(modelOptions[1]);
     const [checked, setChecked] = useState(false);
 
     function onSelectModel(model) {
         setSelectedModel(model);
-        if (model.value < 2) {
+        if (model.value === 0) {
             props.parentModeCallback("Algorithm");
             setChecked(true);
         }
@@ -37,7 +36,7 @@ export default function TopBar(props) {
     }
 
     function onSelectMode() {
-        if (selectedModel.value > 1) {
+        if (selectedModel.value > 0) {
             if (checked === false)
                 props.parentModeCallback("Algorithm");
             else

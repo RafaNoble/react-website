@@ -31,21 +31,21 @@ export default function SearchResults(props) {
             let _body = ""
             
             //Search By Model
-            if (props.model < 2) {
+            if (props.model === 0) {
                 _endpoint = '/api/movie/similar/'
                 _headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
                 _method = "POST"
                 _body = JSON.stringify({text: params.query, genres: props.filters})
             }
             //Search By Title
-            else if(props.model === 2) {
-                _endpoint = '/api/movie/'
+            else if(props.model === 1) {
+                _endpoint = '/api/movie/title/'
                 _headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
                 _method = "POST"
                 _body = JSON.stringify({title: params.query, genres: props.filters, mode: props.mode})
             }
             //Search By Actors
-            else if(props.model === 3) {
+            else if(props.model === 2) {
                 _endpoint = '/api/movie/actors/'
                 _headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
                 _method = "POST"
@@ -71,7 +71,7 @@ export default function SearchResults(props) {
         return () => {
             isMounted = false
         };
-    }, [props.searching, params.query]);
+    }, [props.searching, params.query, props.filters]);
 
     if (isLoading) {
         return (
@@ -89,8 +89,8 @@ export default function SearchResults(props) {
                 {movieList !== undefined && movieList.length > 0 ?
                 (
                     <div>
-                        {params.p === undefined ? (<MovieList listName={`Results for '${params.query}'`} movieList={movieList.slice(0, itemsXPage)}/>)
-                                                : (<MovieList listName={`Results for '${params.query}'`} movieList={movieList.slice((params.p - 1) * itemsXPage, params.p * itemsXPage)}/>)}
+                        {params.p === undefined ? (<MovieList listName={`Results for '${params.query === "" ? 'genres' : params.query}'`} movieList={movieList.slice(0, itemsXPage)}/>)
+                                                : (<MovieList listName={`Results for '${params.query === "" ? 'genres' : params.query}'`} movieList={movieList.slice((params.p - 1) * itemsXPage, params.p * itemsXPage)}/>)}
                         <PageButtons numItems={movieList.length} itemsXPage={itemsXPage} urlHeader={`/react-website/search/${params.query}/`}/>
                     </div>
                 )

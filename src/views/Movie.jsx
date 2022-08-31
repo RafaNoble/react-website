@@ -27,7 +27,7 @@ export default function Movie(props) {
                 if (isMounted) {
                     setMovie(data.content[0]);
                     setSimilarFilms(data.content.slice(1));
-                    if (data.content[0] !== undefined && data.content[0].genres !== undefined && data.content[0].genres !== "[]") {
+                    if (data.content[0] !== undefined && data.content[0].genres !== undefined && data.content[0].genres !== null) {
                         let genres = '';
                         let genresList = [];
                         data.content[0].genres.substring(1, data.content[0].genres.length - 1).split(", ").forEach( (id) => {
